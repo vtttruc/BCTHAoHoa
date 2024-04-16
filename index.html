@@ -19,7 +19,7 @@
 
 <body>
    <div class="hero">
-        <div class="">
+        <div class=""> 
             <header>
                 <div class="nav">
                         <div class="header-introduce">
@@ -94,14 +94,22 @@
                 <div class="main">
                     <div class="main_left">
                         <div class="DanhMuc_SP">
-                            <ul class="list-group" style="border-color: black;">
+                            <ul class="list-group" style="border-color: black;" >
                                 <li class="list-group-item active"><h6 style="text-align: center;">DANH MỤC SẢN PHẨM</h6></li>
-                                <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Cảm biến</a></li>
+                                <ul class="list-group-item">
+                                    <i id ="employee-list"></i>
+                                    <i id ="employee-list"></i>
+                                    <i id ="employee-list"></i>
+                                    <i id ="employee-list"></i>
+                                    <i id ="employee-list"></i>
+                                    <i id ="employee-list"></i>
+                                </ul>
+                                <!-- <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Cảm biến</a></li>
                                 <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Linh kiện điện tử</a></li>
                                 <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Mạch điện</a></li>
                                 <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Module</a></li>
                                 <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Phụ kiện & dụng cụ</a></li>
-                                <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Robot & công nghệ</a></li>
+                                <li class="list-group-item"><i class="fas fa-check-circle green"></i> <a href="#">Robot & công nghệ</a></li> -->
                             </ul>
                         </div>
 
@@ -623,8 +631,32 @@
 		<i class="fa fa-chevron-up"></i>
 	</a>
    </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const apiUrl = 'http://localhost:1337/api/danh-muc-san-phams';
+
+        async function fetchEmployees() {
+            try {
+                const response = await axios.get(apiUrl);
+                const employees = response.data.data;
+                const employeeList = document.getElementById('employee-list');
+                employeeList.innerHTML = '';
+                employees.forEach(employee => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${employee.attributes.Loai}`;
+                    employeeList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error fetching employees:', error);
+            }
+        }
+        fetchEmployees();
+    </script>
+
 </body>
 <script src="assets/javascrip/slideshow.js"></script>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
